@@ -4,7 +4,7 @@
 <!-- Generated 30 oct. 2014 14:26:56 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
 	<class name="fr.utbm.core.entity.Trigger" table="trigger"
-		catalog="LP76">
+		catalog="lp76">
 		<id name="trgId" type="int">
 			<column name="Trg_Id" />
 			<generator class="assigned" />

@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 30 oct. 2014 14:26:56 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="fr.utbm.core.entity.Alerthis" table="alerthis" catalog="LP76">
+    <class name="fr.utbm.core.entity.Alerthis" table="alerthis" catalog="lp76">
         <id name="alhId" type="long">
             <column name="ALH_ID" />
             <generator class="assigned" />

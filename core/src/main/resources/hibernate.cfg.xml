@@ -25,7 +25,7 @@
         
         <mapping resource="fr/utbm/core/entity/Area.hbm.xml"/>
         <mapping resource="fr/utbm/core/entity/Alert.hbm.xml"/>
-        <mapping resource="fr/utbm/core/entity/AlertHis.hbm.xml"/>
+        <mapping resource="fr/utbm/core/entity/Alerthis.hbm.xml"/>
         <mapping resource="fr/utbm/core/entity/Sensor.hbm.xml"/>
         <mapping resource="fr/utbm/core/entity/Station.hbm.xml"/>
         <mapping resource="fr/utbm/core/entity/Temperature.hbm.xml"/>

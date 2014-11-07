@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 30 oct. 2014 14:26:56 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="fr.utbm.core.entity.Temperature" table="temperature" catalog="LP76">
+    <class name="fr.utbm.core.entity.Temperature" table="temperature" catalog="lp76">
         <id name="tmpId" type="long">
             <column name="TMP_ID" />
             <generator class="assigned" />
