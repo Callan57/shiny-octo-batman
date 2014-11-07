@@ -8,13 +8,24 @@ import org.apache.commons.logging.LogFactory;
 
 import fr.utbm.core.entity.Temperature;
 import fr.utbm.dao.HibernateDao;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
+import org.springframework.stereotype.Repository;
 
 /**
  * Home object for domain model class Temperature.
  * @see .Temperature
  * @author Hibernate Tools
  */
-public class TemperatureDao extends HibernateDao {
+@Repository
+public class TemperatureDao extends HibernateDao implements ITemperatureDao {
+
+    private static Session session;
+
+    static {
+        session = getSession();
+    }
 
 	private static final Log log = LogFactory.getLog(TemperatureDao.class);
 
@@ -43,4 +54,19 @@ public class TemperatureDao extends HibernateDao {
 		log.debug("getting all Temperature instances");
 		return (List<Temperature>) super.getAll(Temperature.class);
 	}
+
+    public List<Temperature> getLastByStation()
+    {
+        log.debug("getting last Temperature for all Station");
+        begin();
+        Query query = session.createQuery(
+            "from Temperature as te " +
+                "inner join te.sensor as se " +
+                "inner join se.station as st " +
+                "group by st.staId"
+
+        );
+        commit();
+        return query.list();
+    }
 }
