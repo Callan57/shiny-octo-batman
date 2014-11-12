@@ -5,6 +5,8 @@ import fr.utbm.core.entity.Temperature;
 import fr.utbm.dao.HibernateDao;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Query;
+import org.hibernate.Session;
 
 import java.util.List;
 
@@ -17,6 +19,12 @@ import java.util.List;
 public class TemperatureDao extends HibernateDao {
 
 	private static final Log log = LogFactory.getLog(TemperatureDao.class);
+
+    private static Session session;
+
+    static {
+        session = getSession();
+    }
 
 	public void persist(Temperature transientInstance) {
 		log.debug("persisting Temperature instance");
@@ -43,4 +51,20 @@ public class TemperatureDao extends HibernateDao {
 		log.debug("getting all Temperature instances");
 		return (List<Temperature>) super.getAll(Temperature.class);
 	}
+
+    public List<Temperature> getLastByStation()
+    {
+        log.debug("getting last Temperature for all Station");
+        begin();
+
+        Query query = session.createQuery(
+                "from Temperature as te " +
+                        "inner join te.sensor as se " +
+                        "inner join se.station as st " +
+                        "group by st.id"
+
+        );
+        commit();
+        return query.list();
+    }
 }
