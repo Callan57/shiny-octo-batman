@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 		"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="fr.utbm.core.entity.AlertHistory" table="alerthis" catalog="lp76">
+	<class name="fr.utbm.core.entity.AlertHistory" table="AlertHis" catalog="lp76">
 		<id name="id" type="int" column="ALH_ID">
 			<generator class="assigned" />
 		</id>

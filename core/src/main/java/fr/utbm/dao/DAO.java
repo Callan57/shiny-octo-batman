@@ -1,10 +1,14 @@
 package fr.utbm.dao;
 
 import fr.utbm.core.entity.Alert;
+import fr.utbm.core.entity.Temperature;
+import fr.utbm.core.service.ServiceListeTemperatures;
 import fr.utbm.core.tools.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import java.util.List;
 
 /**
  * Provide DAO with basic session operations
@@ -89,11 +93,9 @@ public abstract class DAO {
 	}
 
 	public static void main(String[] args) {
-		Alert alert = new Alert();
-		alert.setCode("TEST");
-		alert.setLabel("TEST");
-		alert.setDescription("TEST");
-		DaoFactory.getAlertDao().persist(alert);
+        ServiceListeTemperatures st = new ServiceListeTemperatures();
+        List<Temperature> l = st.getLastTemperatures();
+        char c = 'c';
 	}
 
 	protected abstract void persist(Object object);

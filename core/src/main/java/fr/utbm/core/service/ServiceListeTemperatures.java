@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ServiceListeTemperatures implements IServiceListeTemperatures
 {
@@ -15,33 +16,33 @@ public class ServiceListeTemperatures implements IServiceListeTemperatures
     private ITemperatureDao dao;
 
     @Transactional
-    public ArrayList<Temperature> getLastTemperatures()
+    public List<Temperature> getLastTemperatures()
     {
-        ArrayList<Temperature> lstTemperatures = new ArrayList<Temperature>();
+        List<Temperature> lstTemperatures;
+        lstTemperatures = dao.getLastByStation();
+        return lstTemperatures;
+    }
+
+    @Transactional
+    public List<Temperature> getTemperatures()
+    {
+        List<Temperature> lstTemperatures = null;
 
         return lstTemperatures;
     }
 
     @Transactional
-    public ArrayList<Temperature> getTemperatures()
+    public List<Temperature> getLastFilteredTemperatures(Date debut, Date fin, int idStation)
     {
-        ArrayList<Temperature> lstTemperatures = new ArrayList<Temperature>();
+        List<Temperature> lstTemperatures = null;
 
         return lstTemperatures;
     }
 
     @Transactional
-    public ArrayList<Temperature> getLastFilteredTemperatures(Date debut, Date fin, int idStation)
+    public List<Temperature> getFilteredTemperatures(Date debut, Date fin, int idStation)
     {
-        ArrayList<Temperature> lstTemperatures = new ArrayList<Temperature>();
-
-        return lstTemperatures;
-    }
-
-    @Transactional
-    public ArrayList<Temperature> getFilteredTemperatures(Date debut, Date fin, int idStation)
-    {
-        ArrayList<Temperature> lstTemperatures = new ArrayList<Temperature>();
+        List<Temperature> lstTemperatures = null;
 
         return lstTemperatures;
     }

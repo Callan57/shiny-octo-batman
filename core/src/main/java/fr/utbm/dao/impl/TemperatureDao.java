@@ -7,7 +7,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,7 +18,9 @@ import java.util.List;
  * @author Hibernate Tools
  * @see .Temperature
  */
-public class TemperatureDao extends HibernateDao {
+@Repository
+public class TemperatureDao extends HibernateDao implements ITemperatureDao
+{
 
 	private static final Log log = LogFactory.getLog(TemperatureDao.class);
 
@@ -67,4 +71,54 @@ public class TemperatureDao extends HibernateDao {
         commit();
         return query.list();
     }
+
+    public List<Temperature> getAllForStation(int idStation)
+    {
+        log.debug("getting all Temperature for one Station");
+        begin();
+
+        Query query = session.createQuery(
+                "from Temperature as te " +
+                        "inner join te.sensor as se " +
+                        "inner join se.station as st " +
+                        "where st.id = " + idStation
+        );
+        commit();
+        return query.list();
+    }
+
+    public List<Temperature> getLastFilteredTemperaturesByStation(Date debut,Date fin)
+    {
+        log.debug("getting last filtered Temperature for all Station");
+        begin();
+
+        Query query = session.createQuery(
+                "from Temperature as te " +
+                        "inner join te.sensor as se " +
+                        "inner join se.station as st " +
+                        "where te.date >= " + debut +" and te.date <= " + fin + " " +
+                        "group by st.id"
+
+        );
+        commit();
+        return query.list();
+    }
+
+    public List<Temperature> getLastFilteredTemperaturesForStation(Date debut,Date fin, int idStation)
+    {
+        log.debug("getting all filtered Temperature for one Station");
+        begin();
+
+        Query query = session.createQuery(
+                "from Temperature as te " +
+                        "inner join te.sensor as se " +
+                        "inner join se.station as st " +
+                        "where te.date >= " + debut +" and te.date <= " + fin + " " +
+                        "and st.id = " + idStation
+
+        );
+        commit();
+        return query.list();
+    }
+
 }
