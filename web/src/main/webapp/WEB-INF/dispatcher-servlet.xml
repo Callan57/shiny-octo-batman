@@ -12,7 +12,7 @@
     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
 	<context:component-scan base-package="fr.utbm.web" />
-	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!--<tx:annotation-driven transaction-manager="transactionManager" />-->
 	<mvc:annotation-driven />
 
 	<bean   
@@ -39,23 +39,23 @@
 		</property>
 	</bean>
 	
-	<bean id="messageSource"
-		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<property name="basename" value="classpath:messages" />
-		<property name="defaultEncoding" value="ISO-8859-1" />
-	</bean>
+	<!--<bean id="messageSource"-->
+		<!--class="org.springframework.context.support.ReloadableResourceBundleMessageSource">-->
+		<!--<property name="basename" value="classpath:messages" />-->
+		<!--<property name="defaultEncoding" value="ISO-8859-1" />-->
+	<!--</bean>-->
 
-	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="jndiName" value="java:comp/env/jdbc/dsMonApplication" />
-	</bean>
+	<!--<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">-->
+		<!--<property name="jndiName" value="java:comp/env/jdbc/dsMonApplication" />-->
+	<!--</bean>-->
 
-	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
+	<!--<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">-->
+		<!--<property name="dataSource" ref="dataSource" />-->
+	<!--</bean>-->
 
-	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="entityManagerFactory" />
-	</bean>
+	<!--<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">-->
+		<!--<property name="entityManagerFactory" ref="entityManagerFactory" />-->
+	<!--</bean>-->
 </beans>
 
 

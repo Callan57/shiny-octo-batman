@@ -59,9 +59,9 @@
 	<!-- Annotation for Transaction manager -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
-	<jdbc:initialize-database data-source="dataSource" enabled="true">
-		<jdbc:script location="classpath:sql/create.sql"/>
-		<jdbc:script location="classpath:sql/insert.sql"/>
-	</jdbc:initialize-database>
+	<!--<jdbc:initialize-database data-source="dataSource" enabled="true">-->
+		<!--<jdbc:script location="classpath:sql/create.sql"/>-->
+		<!--<jdbc:script location="classpath:sql/insert.sql"/>-->
+	<!--</jdbc:initialize-database>-->
 
 </beans>    

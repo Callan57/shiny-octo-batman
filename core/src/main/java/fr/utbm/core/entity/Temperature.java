@@ -2,6 +2,7 @@ package fr.utbm.core.entity;
 
 import java.util.Date;
 
+
 public class Temperature {
 	private int id;
 	private Sensor sensor;

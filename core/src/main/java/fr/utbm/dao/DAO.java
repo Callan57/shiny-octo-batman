@@ -93,9 +93,6 @@ public abstract class DAO {
 	}
 
 	public static void main(String[] args) {
-        ServiceListeTemperatures st = new ServiceListeTemperatures();
-        List<Temperature> l = st.getLastTemperatures();
-        char c = 'c';
 	}
 
 	protected abstract void persist(Object object);

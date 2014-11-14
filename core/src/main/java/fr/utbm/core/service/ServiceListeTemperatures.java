@@ -4,12 +4,14 @@ import fr.utbm.core.entity.Temperature;
 import fr.utbm.dao.impl.ITemperatureDao;
 import fr.utbm.dao.impl.TemperatureDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class ServiceListeTemperatures implements IServiceListeTemperatures
 {
     @Autowired
