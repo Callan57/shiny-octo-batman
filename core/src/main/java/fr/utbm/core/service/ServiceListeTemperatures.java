@@ -26,26 +26,26 @@ public class ServiceListeTemperatures implements IServiceListeTemperatures
     }
 
     @Transactional
-    public List<Temperature> getTemperatures()
+    public List<Temperature> getTemperatures(int idStation)
     {
-        List<Temperature> lstTemperatures = null;
-
+        List<Temperature> lstTemperatures;
+        lstTemperatures = dao.getAllForStation(idStation);
         return lstTemperatures;
     }
 
     @Transactional
-    public List<Temperature> getLastFilteredTemperatures(Date debut, Date fin, int idStation)
+    public List<Temperature> getLastFilteredTemperatures(Date debut, Date fin)
     {
-        List<Temperature> lstTemperatures = null;
-
+        List<Temperature> lstTemperatures;
+        lstTemperatures = dao.getLastFilteredTemperaturesByStation(debut,fin);
         return lstTemperatures;
     }
 
     @Transactional
     public List<Temperature> getFilteredTemperatures(Date debut, Date fin, int idStation)
     {
-        List<Temperature> lstTemperatures = null;
-
+        List<Temperature> lstTemperatures ;
+        lstTemperatures = dao.getLastFilteredTemperaturesForStation(debut,fin,idStation);
         return lstTemperatures;
     }
 }

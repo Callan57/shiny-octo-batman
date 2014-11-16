@@ -96,10 +96,11 @@ public class TemperatureDao extends HibernateDao implements ITemperatureDao
                 "from Temperature as te " +
                         "inner join te.sensor as se " +
                         "inner join se.station as st " +
-                        "where te.date >= " + debut +" and te.date <= " + fin + " " +
+                        "where te.date >= :dateDeb and te.date <= :dateFin " +
                         "group by st.id"
-
         );
+        query.setDate("dateDeb",debut);
+        query.setDate("dateFin",fin);
         commit();
         return query.list();
     }
@@ -113,10 +114,12 @@ public class TemperatureDao extends HibernateDao implements ITemperatureDao
                 "from Temperature as te " +
                         "inner join te.sensor as se " +
                         "inner join se.station as st " +
-                        "where te.date >= " + debut +" and te.date <= " + fin + " " +
+                        "where te.date >= :dateDeb and te.date <= :dateFin " +
                         "and st.id = " + idStation
 
         );
+        query.setDate("dateDeb",debut);
+        query.setDate("dateFin",fin);
         commit();
         return query.list();
     }
