@@ -56,7 +56,7 @@ public class TemperatureDao extends HibernateDao implements ITemperatureDao
 		return (List<Temperature>) super.getAll(Temperature.class);
 	}
 
-    public List<Temperature> getLastByStation()
+    public List<Object[]> getLastByStation()
     {
         log.debug("getting last Temperature for all Station");
         begin();
@@ -72,7 +72,7 @@ public class TemperatureDao extends HibernateDao implements ITemperatureDao
         return query.list();
     }
 
-    public List<Temperature> getAllForStation(int idStation)
+    public List<Object[]> getAllForStation(int idStation)
     {
         log.debug("getting all Temperature for one Station");
         begin();
@@ -87,25 +87,7 @@ public class TemperatureDao extends HibernateDao implements ITemperatureDao
         return query.list();
     }
 
-    public List<Temperature> getLastFilteredTemperaturesByStation(Date debut,Date fin)
-    {
-        log.debug("getting last filtered Temperature for all Station");
-        begin();
-
-        Query query = session.createQuery(
-                "from Temperature as te " +
-                        "inner join te.sensor as se " +
-                        "inner join se.station as st " +
-                        "where te.date >= :dateDeb and te.date <= :dateFin " +
-                        "group by st.id"
-        );
-        query.setDate("dateDeb",debut);
-        query.setDate("dateFin",fin);
-        commit();
-        return query.list();
-    }
-
-    public List<Temperature> getLastFilteredTemperaturesForStation(Date debut,Date fin, int idStation)
+    public List<Object[]> getLastFilteredTemperaturesForStation(Date debut,Date fin, int idStation)
     {
         log.debug("getting all filtered Temperature for one Station");
         begin();

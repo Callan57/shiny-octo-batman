@@ -12,8 +12,7 @@ public interface ITemperatureDao
     public void delete(Temperature persistentInstance);
     public Temperature findById(int id);
     public List<Temperature> getAll();
-    public List<Temperature> getLastByStation();
-    public List<Temperature> getAllForStation(int idStation);
-    public List<Temperature> getLastFilteredTemperaturesByStation(Date debut,Date fin);
-    public List<Temperature> getLastFilteredTemperaturesForStation(Date debut,Date fin, int idStation);
+    public List<Object[]> getLastByStation();
+    public List<Object[]> getAllForStation(int idStation);
+    public List<Object[]> getLastFilteredTemperaturesForStation(Date debut,Date fin, int idStation);
 };

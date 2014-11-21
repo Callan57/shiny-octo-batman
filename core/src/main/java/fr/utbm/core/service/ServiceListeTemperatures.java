@@ -1,6 +1,9 @@
 package fr.utbm.core.service;
 
+import fr.utbm.core.entity.Sensor;
+import fr.utbm.core.entity.Station;
 import fr.utbm.core.entity.Temperature;
+import fr.utbm.core.model.Wendu;
 import fr.utbm.dao.impl.ITemperatureDao;
 import fr.utbm.dao.impl.TemperatureDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,36 +19,54 @@ public class ServiceListeTemperatures implements IServiceListeTemperatures
 {
     @Autowired
     private ITemperatureDao dao;
+    private Wendu temp;
 
     @Transactional
-    public List<Temperature> getLastTemperatures()
+    public ArrayList<Wendu> getLastTemperatures()
     {
-        List<Temperature> lstTemperatures;
-        lstTemperatures = dao.getLastByStation();
-        return lstTemperatures;
+        ArrayList<Wendu> lstOut = new ArrayList<Wendu>();
+        List<Object[]> lstTemperatures = dao.getLastByStation();
+        for (Object[] tab : lstTemperatures)
+        {
+            Temperature t = (Temperature)tab[0];
+            Sensor se = (Sensor)tab[1];
+            Station st = (Station)tab[2];
+            Wendu item = new Wendu(t.getId(),t.getValue(),t.getDate(),se.getId(),se.getLabel(),st.getId(),st.getLabel(),st.getArea().getId(),st.getArea().getLabel(),st.getArea().getRoad());
+            lstOut.add(item);
+        }
+
+        return lstOut;
     }
 
     @Transactional
-    public List<Temperature> getTemperatures(int idStation)
+    public ArrayList<Wendu> getTemperatures(int idStation)
     {
-        List<Temperature> lstTemperatures;
-        lstTemperatures = dao.getAllForStation(idStation);
-        return lstTemperatures;
+        ArrayList<Wendu> lstOut = new ArrayList<Wendu>();
+        List<Object[]> lstTemperatures = dao.getAllForStation(idStation);
+        for (Object[] tab : lstTemperatures)
+        {
+            Temperature t = (Temperature)tab[0];
+            Sensor se = (Sensor)tab[1];
+            Station st = (Station)tab[2];
+            Wendu item = new Wendu(t.getId(),t.getValue(),t.getDate(),se.getId(),se.getLabel(),st.getId(),st.getLabel(),st.getArea().getId(),st.getArea().getLabel(),st.getArea().getRoad());
+            lstOut.add(item);
+        }
+        return lstOut;
     }
 
     @Transactional
-    public List<Temperature> getLastFilteredTemperatures(Date debut, Date fin)
+    public ArrayList<Wendu> getFilteredTemperatures(Date debut, Date fin, int idStation)
     {
-        List<Temperature> lstTemperatures;
-        lstTemperatures = dao.getLastFilteredTemperaturesByStation(debut,fin);
-        return lstTemperatures;
-    }
-
-    @Transactional
-    public List<Temperature> getFilteredTemperatures(Date debut, Date fin, int idStation)
-    {
-        List<Temperature> lstTemperatures ;
-        lstTemperatures = dao.getLastFilteredTemperaturesForStation(debut,fin,idStation);
-        return lstTemperatures;
+        ArrayList<Wendu> lstOut = new ArrayList<Wendu>();
+        List<Object[]> lstTemperatures = dao.getLastFilteredTemperaturesForStation(debut,fin,idStation);
+        for (Object[] tab : lstTemperatures)
+        {
+            Temperature t = (Temperature)tab[0];
+            Sensor se = (Sensor)tab[1];
+            Station st = (Station)tab[2];
+            Wendu item = new Wendu(t.getId(),t.getValue(),t.getDate(),se.getId(),se.getLabel(),st.getId(),st.getLabel(),st.getArea().getId(),st.getArea().getLabel(),st.getArea().getRoad());
+            lstOut.add(item);
+        }
+        return lstOut;
     }
 }
