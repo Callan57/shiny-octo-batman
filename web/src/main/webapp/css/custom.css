@@ -1,0 +1,45 @@
+body{
+    min-width: 300px;
+    font-family: 'Arail';
+}
+
+/* Formulaire */
+.form-control {resize:none; }
+
+/* Margin et padding */
+.voffset  { margin-top: 2px; }
+.voffset1 { margin-top: 5px; }
+.voffset2 { margin-top: 10px; }
+.voffset3 { margin-top: 20px; }
+.voffset4 { margin-top: 30px; }
+.voffset5 { margin-top: 40px; }
+.voffset6 { margin-top: 60px; }
+.voffset7 { margin-top: 70px; }
+.voffset8 { margin-top: 100px; }
+.voffset9 { margin-top: 150px; }
+
+.poffset  { padding-top: 2px; }
+.poffset1 { padding-top: 5px; }
+.poffset2 { padding-top: 10px; }
+.poffset3 { padding-top: 15px; }
+.poffset4 { padding-top: 30px; }
+.poffset5 { padding-top: 40px; }
+.poffset6 { padding-top: 60px; }
+.poffset7 { padding-top: 80px; }
+.poffset8 { padding-top: 100px; }
+.poffset9 { padding-top: 125px; }
+
+.noborder { border: none; }
+.nopadding { padding: 0; }
+
+.nopaddingc {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.nomargin { margin: 0; }
+.marginauto { margin: auto; }
+
+.bpadding200
+{
+    padding-bottom: 200px;
+}

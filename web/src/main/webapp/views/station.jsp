@@ -1,19 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" isELIgnored="false" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Recherche</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="css/custom.css" />
+    <title>Station</title>
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/custom.css" />
 </head>
 <body>
 
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <a href="./" class="navbar-brand">Recherche température</a>
+            <a href="../" class="navbar-brand">Recherche température</a>
         </div>
     </div>
 </nav>
@@ -22,10 +24,31 @@
 
     <table class="table">
         <thead>
+        <h2>Station - ${station}</h2>
+        <h4>Zone - ${zone}</h4>
+        <h4>Route - ${route}</h4>
+
+       <form:form modelAttribute="StationForm" method="post" action="../../station/${id}">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span> Début</div>
+                    <form:input path="begin" cssClass="form-control" cssErrorClass="has-error"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span> Fin</div>
+                    <form:input path="end" cssClass="form-control" cssErrorClass="has-error"/>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-default">Filter</button>
+        </form:form>
+
+
+
         <tr>
-            <th>Zone</th>
-            <th>Route</th>
-            <th>Station</th>
+            <th>Sonde</th>
             <th>Date</th>
             <th>Température</th>
         </tr>
@@ -53,9 +76,7 @@
                 </c:otherwise>
             </c:choose>
 
-            <td>${temp.getAreaLabel()}</td>
-            <td>${temp.getAreaRoad()}</td>
-            <td><a href="./station/${temp.getStationId()}">${temp.getStationLabel()}</a></td>
+            <td>${temp.getSensorLabel()}</td>
             <td>${temp.getTemperatureDate()}</td>
             <td>${temp.getTemperatureValue()}°</td>
             </tr>
@@ -67,7 +88,7 @@
 </body>
 
 
-<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="../../js/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="../../js/bootstrap.js"></script>
 
 </html>
