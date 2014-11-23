@@ -16,7 +16,7 @@
             <a href="./" class="navbar-brand">Recherche température</a>
         </div>
         <div class="pull-right">
-            <input type="text" id="search" class="form-control" placeorder="Filtre"/>
+            <input type="text" id="search" class="form-control" placeholder="Filtre"/>
         </div>
     </div>
 </nav>
