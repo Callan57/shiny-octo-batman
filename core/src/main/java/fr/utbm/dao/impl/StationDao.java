@@ -2,45 +2,81 @@ package fr.utbm.dao.impl;// default package
 // Generated 31 oct. 2014 13:51:02 by Hibernate Tools 3.4.0.CR1
 
 import fr.utbm.core.entity.Station;
+import fr.utbm.core.entity.Temperature;
 import fr.utbm.dao.HibernateDao;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
- * Home object for domain model class Station.
+ * Home object for domain model class Temperature.
  *
  * @author Hibernate Tools
- * @see .Station
+ * @see .Temperature
  */
-public class StationDao extends HibernateDao {
+@Repository
+public class StationDao extends HibernateDao implements IStationDao
+{
 
-	private static final Log log = LogFactory.getLog(StationDao.class);
+    private static final Log log = LogFactory.getLog(TemperatureDao.class);
 
-	public void persist(Station transientInstance) {
-		log.debug("persisting Station instance");
-		super.persist(transientInstance);
-	}
+    private static Session session;
 
-	public void update(Station instance) {
-		log.debug("attaching dirty Station instance");
-		super.update(instance);
-	}
+    static {
+        session = getSession();
+    }
 
-	public void delete(Station persistentInstance) {
-		log.debug("deleting Station instance");
-		super.delete(persistentInstance);
-	}
+    public void persist(Station transientInstance) {
+        log.debug("persisting Temperature instance");
+        super.persist(transientInstance);
+    }
 
-	public Station findById(int id) {
-		log.debug("getting Station instance with id: " + id);
-		return (Station) super.get(Station.class, id);
-	}
+    public void update(Station instance) {
+        log.debug("attaching dirty Temperature instance");
+        super.update(instance);
+    }
 
-	@SuppressWarnings("unchecked")
-	public List<Station> getAll() {
-		log.debug("getting all Station instances");
-		return (List<Station>) super.getAll(Station.class);
-	}
+    public void delete(Station persistentInstance) {
+        log.debug("deleting Temperature instance");
+        super.delete(persistentInstance);
+    }
+
+    public Station findById(int id) {
+
+        log.debug("getting last Temperature for all Station");
+        begin();
+
+        Query query = session.createQuery(
+                "from Station as st " +
+                        "WHERE  st.id = " + id
+
+        );
+        commit();
+
+        Station station = null;
+
+        List objects = query.list();
+
+        for (Object tab :objects )
+        {
+            station = (Station)tab;
+        }
+
+        return station;
+
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Station> getAll() {
+        log.debug("getting all Temperature instances");
+        return (List<Station>) super.getAll(Station.class);
+    }
+
+
 }

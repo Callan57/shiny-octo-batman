@@ -1,7 +1,9 @@
 package fr.utbm.web.controller;
 
+import fr.utbm.core.entity.Station;
 import fr.utbm.core.model.Wendu;
 import fr.utbm.core.service.IServiceListeTemperatures;
+import fr.utbm.core.service.IServiceStation;
 import fr.utbm.web.form.StationForm;
 import org.exolab.castor.types.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +23,12 @@ import java.util.Date;
 public class RechercheController {
 
     @Autowired
-    IServiceListeTemperatures service;
+    IServiceListeTemperatures serviceTemp;
+    IServiceStation serviceStation;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
      public String LastTemperature(final ModelMap pModel) {
-        ArrayList<Wendu> tempList = service.getLastTemperatures();
+        ArrayList<Wendu> tempList = serviceTemp.getLastTemperatures();
         pModel.addAttribute("tempList", tempList);
         return "recherche";
     }
@@ -35,11 +38,12 @@ public class RechercheController {
 
         StationForm formData = new StationForm("","");
 
-        ArrayList<Wendu> tempList = service.getTemperatures(id);
+        ArrayList<Wendu> tempList = serviceTemp.getTemperatures(id);
+        Station station = serviceStation.getStaionById(id);
         pModel.addAttribute("tempList", tempList);
-        pModel.addAttribute("station", tempList.get(0).getStationLabel());
-        pModel.addAttribute("zone", tempList.get(0).getAreaLabel());
-        pModel.addAttribute("route", tempList.get(0).getAreaRoad());
+        pModel.addAttribute("station", station.getLabel());
+        pModel.addAttribute("zone", station.getArea().getLabel());
+        pModel.addAttribute("route", station.getArea().getRoad());
         pModel.addAttribute("id", id);
         pModel.addAttribute("StationForm",formData);
         return "station";
@@ -62,11 +66,12 @@ public class RechercheController {
             e.printStackTrace();
         }
 
-        ArrayList<Wendu> tempList = service.getFilteredTemperatures(dateBegin,dateEnd,id);
+        ArrayList<Wendu> tempList = serviceTemp.getFilteredTemperatures(dateBegin, dateEnd, id);
+        Station station = serviceStation.getStaionById(id);
         pModel.addAttribute("tempList", tempList);
-        pModel.addAttribute("station", tempList.get(0).getStationLabel());
-        pModel.addAttribute("zone", tempList.get(0).getAreaLabel());
-        pModel.addAttribute("route", tempList.get(0).getAreaRoad());
+        pModel.addAttribute("station", station.getLabel());
+        pModel.addAttribute("zone", station.getArea().getLabel());
+        pModel.addAttribute("route", station.getArea().getRoad());
         pModel.addAttribute("id", id);
         pModel.addAttribute("StationForm",formData);
 

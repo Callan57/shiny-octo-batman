@@ -28,7 +28,7 @@
         <h4>Zone - ${zone}</h4>
         <h4>Route - ${route}</h4>
 
-       <form:form modelAttribute="StationForm" method="post" action="../../station/${id}">
+       <form:form modelAttribute="StationForm" method="post" action="../../station/${id}" cssClass="poffset2">
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span> Début</div>
