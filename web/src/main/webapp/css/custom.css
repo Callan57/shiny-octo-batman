@@ -1,6 +1,6 @@
 body{
     min-width: 300px;
-    font-family: 'Arail';
+    font-family: 'Arial';
 }
 
 /* Formulaire */
@@ -42,4 +42,8 @@ body{
 .bpadding200
 {
     padding-bottom: 200px;
+}
+
+#search{
+    margin-top:8px;
 }

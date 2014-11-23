@@ -15,12 +15,15 @@
         <div class="navbar-header">
             <a href="./" class="navbar-brand">Recherche température</a>
         </div>
+        <div class="pull-right">
+            <input type="text" id="search" class="form-control" placeorder="Filtre"/>
+        </div>
     </div>
 </nav>
 
 <div class="container poffset7">
 
-    <table class="table">
+    <table class="table" id="data">
         <thead>
         <tr>
             <th>Zone</th>
@@ -33,19 +36,19 @@
         <tbody>
         <c:forEach var="temp" items="${tempList}">
             <c:choose>
-                <c:when test="${temp.getTemperatureValue() <= 10 }">
+                <c:when test="${temp.getTemperatureValue() <= 0 }">
                     <tr class="info">
                 </c:when>
-                <c:when test="${temp.getTemperatureValue() <= 30 && temp.getTemperatureValue() > 10 }">
+                <c:when test="${temp.getTemperatureValue() <= 10 && temp.getTemperatureValue() > 0 }">
                     <tr class="active">
                 </c:when>
-                <c:when test="${temp.getTemperatureValue() <= 50 && temp.getTemperatureValue() > 30 }">
+                <c:when test="${temp.getTemperatureValue() <= 20 && temp.getTemperatureValue() > 10 }">
                     <tr class="success">
                 </c:when>
-                <c:when test="${temp.getTemperatureValue() <= 70 && temp.getTemperatureValue() > 50 }">
+                <c:when test="${temp.getTemperatureValue() <= 30 && temp.getTemperatureValue() > 20 }">
                     <tr class="warning">
                 </c:when>
-                <c:when test="${temp.getTemperatureValue() > 70 }">
+                <c:when test="${temp.getTemperatureValue() > 30 }">
                     <tr class="danger">
                 </c:when>
                 <c:otherwise>
@@ -67,7 +70,8 @@
 </body>
 
 
+
 <script type="text/javascript" src="js/jquery-1.11.1.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
-
+<script type="text/javascript" src="js/script.js"></script>
 </html>

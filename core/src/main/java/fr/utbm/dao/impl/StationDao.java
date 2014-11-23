@@ -3,6 +3,7 @@ package fr.utbm.dao.impl;// default package
 
 import fr.utbm.core.entity.Station;
 import fr.utbm.core.entity.Temperature;
+import fr.utbm.core.tools.HibernateUtil;
 import fr.utbm.dao.HibernateDao;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -50,23 +51,11 @@ public class StationDao extends HibernateDao implements IStationDao
     public Station findById(int id) {
 
         log.debug("getting last Temperature for all Station");
-        begin();
 
-        Query query = session.createQuery(
-                "from Station as st " +
-                        "WHERE  st.id = " + id
+        Station station;
 
-        );
-        commit();
-
-        Station station = null;
-
-        List objects = query.list();
-
-        for (Object tab :objects )
-        {
-            station = (Station)tab;
-        }
+        session = HibernateUtil.getSessionFactory().openSession();
+        station =  (Station) session.get(Station.class, id);
 
         return station;
 

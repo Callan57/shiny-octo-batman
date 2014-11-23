@@ -5,7 +5,6 @@ import fr.utbm.core.model.Wendu;
 import fr.utbm.core.service.IServiceListeTemperatures;
 import fr.utbm.core.service.IServiceStation;
 import fr.utbm.web.form.StationForm;
-import org.exolab.castor.types.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 
 @Controller
 public class RechercheController {
 
     @Autowired
     IServiceListeTemperatures serviceTemp;
+    @Autowired
     IServiceStation serviceStation;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -37,6 +36,7 @@ public class RechercheController {
     public String StationTempetature(@PathVariable int id ,final ModelMap pModel) {
 
         StationForm formData = new StationForm("","");
+        ArrayList<String> errors = new ArrayList<String>();
 
         ArrayList<Wendu> tempList = serviceTemp.getTemperatures(id);
         Station station = serviceStation.getStaionById(id);
@@ -45,6 +45,7 @@ public class RechercheController {
         pModel.addAttribute("zone", station.getArea().getLabel());
         pModel.addAttribute("route", station.getArea().getRoad());
         pModel.addAttribute("id", id);
+        pModel.addAttribute("errors", errors);
         pModel.addAttribute("StationForm",formData);
         return "station";
     }
@@ -52,27 +53,32 @@ public class RechercheController {
     @RequestMapping(value = "/station/{id}", method = RequestMethod.POST)
     public String StationTempetatureFilterd(@PathVariable int id ,@ModelAttribute("StationForm") StationForm formData,final ModelMap pModel) {
 
-
+        ArrayList<String> errors = new ArrayList<String>();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 
         Date dateBegin = null;
         Date dateEnd = null;
 
+        ArrayList<Wendu> tempList = null;
+
         try {
             dateBegin = sdf.parse(formData.getBegin());
             dateEnd = sdf.parse(formData.getEnd());
+            tempList = serviceTemp.getFilteredTemperatures(dateBegin, dateEnd, id);
         } catch (ParseException e) {
+            tempList = serviceTemp.getTemperatures(id);
+            errors.add("Format de date incorrect ! YYYY-MM-DD");
             e.printStackTrace();
         }
 
-        ArrayList<Wendu> tempList = serviceTemp.getFilteredTemperatures(dateBegin, dateEnd, id);
         Station station = serviceStation.getStaionById(id);
         pModel.addAttribute("tempList", tempList);
         pModel.addAttribute("station", station.getLabel());
         pModel.addAttribute("zone", station.getArea().getLabel());
         pModel.addAttribute("route", station.getArea().getRoad());
         pModel.addAttribute("id", id);
+        pModel.addAttribute("errors", errors);
         pModel.addAttribute("StationForm",formData);
 
         return "station";
