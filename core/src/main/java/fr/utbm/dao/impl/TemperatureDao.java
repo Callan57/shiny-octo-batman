@@ -65,7 +65,11 @@ public class TemperatureDao extends HibernateDao implements ITemperatureDao
                 "from Temperature as te " +
                         "inner join te.sensor as se " +
                         "inner join se.station as st " +
-                        "group by st.id"
+                        "WHERE te.date = (SELECT max(te2.date) FROM Temperature te2 " +
+                        "INNER JOIN te2.sensor as se2 " +
+                        "INNER JOIN se2.station st2 " +
+                        "WHERE st2.id = st.id)" +
+                        "GROUP BY st.id"
 
         );
         commit();
@@ -81,7 +85,8 @@ public class TemperatureDao extends HibernateDao implements ITemperatureDao
                 "from Temperature as te " +
                         "inner join te.sensor as se " +
                         "inner join se.station as st " +
-                        "where st.id = " + idStation
+                        "where st.id = " + idStation +
+                        " order by te.date DESC"
         );
         commit();
         return query.list();
@@ -97,7 +102,8 @@ public class TemperatureDao extends HibernateDao implements ITemperatureDao
                         "inner join te.sensor as se " +
                         "inner join se.station as st " +
                         "where te.date >= :dateDeb and te.date <= :dateFin " +
-                        "and st.id = " + idStation
+                        "and st.id = " + idStation +
+                        " order by te.date DESC"
 
         );
         query.setDate("dateDeb",debut);
