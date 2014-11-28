@@ -7,8 +7,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Station</title>
-    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="../../css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../css/custom.css" />
 </head>
 <body>
 
@@ -35,7 +35,7 @@
         <h4>Zone - ${zone}</h4>
         <h4>Route - ${route}</h4>
 
-       <form:form modelAttribute="StationForm" method="post" action="../../station/${id}" cssClass="poffset2">
+       <form:form modelAttribute="StationForm" method="post" action="../station/${id}" cssClass="poffset2">
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span> Début</div>
@@ -97,7 +97,7 @@
 </body>
 
 
-<script type="text/javascript" src="../../js/jquery-1.11.1.js"></script>
-<script type="text/javascript" src="../../js/bootstrap.js"></script>
-<script type="text/javascript" src="../../js/script.js"></script>
+<script type="text/javascript" src=".../js/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="../js/bootstrap.js"></script>
+<script type="text/javascript" src="../js/script.js"></script>
 </html>
