@@ -3,16 +3,17 @@
 		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
-		<property name="connection.driver_class">
-			com.mysql.jdbc.Driver
-		</property>
-		<property name="connection.url">
-			jdbc:mysql://localhost:3306/lp76
-		</property>
-		<property name="connection.username">root</property>
-		<property name="connection.password"></property>
-		<property name="connection.pool_size">10</property>
+		<!--<property name="connection.driver_class">-->
+			<!--com.mysql.jdbc.Driver-->
+		<!--</property>-->
+		<!--<property name="connection.url">-->
+			<!--jdbc:mysql://localhost:3306/lp76-->
+		<!--</property>-->
+		<!--<property name="connection.username">root</property>-->
+		<!--<property name="connection.password"></property>-->
+		<!--<property name="connection.pool_size">10</property>-->
 		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.connection.datasource">java:comp/env/jdbc/MeteoDS</property>
 		<!-- Enable Hibernate's automatic session context management -->
 		<property name="current_session_context_class">thread</property>
 		<!-- Disable the second-level cache  -->
