@@ -3,21 +3,23 @@ package fr.utbm.core.model;
 import java.util.Date;
 
 /**
- * Created by callan on 21/11/14.
+ * Created by Julien on 21/11/14.
+ * Classe correspondant au modèle température envoyé à la vue
  */
 public class Wendu
 {
-    private int temperatureId;
-    private float temperatureValue;
-    private Date temperatureDate;
-    private int sensorId;
-    private String sensorLabel;
-    private int stationId;
-    private String stationLabel;
-    private int areaId;
-    private String areaLabel;
-    private String areaRoad;
+    private int temperatureId;//idendifiant de la température
+    private float temperatureValue;//valeur de la température
+    private Date temperatureDate;//date de relevé de la température
+    private int sensorId;//identifiant de la sonde
+    private String sensorLabel;//nom de la sonde
+    private int stationId;//identifiant de la station
+    private String stationLabel;//nom de la station
+    private int areaId;//identifiant de la zone
+    private String areaLabel;//nom de la zone
+    private String areaRoad;//nom de la route
 
+    //constructeur
     public Wendu(int temperatureId, float temperatureValue, Date temperatureDate, int sensorId, String sensorLabel, int stationId, String stationLabel, int areaId, String areaLabel, String areaRoad) {
         this.temperatureId = temperatureId;
         this.temperatureValue = temperatureValue;
@@ -31,6 +33,7 @@ public class Wendu
         this.areaRoad = areaRoad;
     }
 
+    //getters et setters
     public int getTemperatureId() {
         return temperatureId;
     }

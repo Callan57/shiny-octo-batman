@@ -48,13 +48,17 @@ public class StationDao extends HibernateDao implements IStationDao
         super.delete(persistentInstance);
     }
 
+    //------------------------------------------------------------------------
+    //Requéte à la base de données
+    //id : identifiant de la station
+    //retourne les informations d'une station
+    //------------------------------------------------------------------------
     public Station findById(int id) {
-
-        log.debug("getting last Temperature for all Station");
-
+        //initialisation de la station
         Station station;
-
+        //ouverture d'une session hibernate
         session = HibernateUtil.getSessionFactory().openSession();
+        //demande des informations de la station
         station =  (Station) session.get(Station.class, id);
 
         return station;
